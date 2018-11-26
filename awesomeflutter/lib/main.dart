@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.amber
+        primarySwatch: Colors.orange
       ),
       home: MyHomePage(title: 'Lucas Viana Home Page'),
     );
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'You have clicked the button this many times:',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 255)
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.display3,
             ),
           ],
         ),
