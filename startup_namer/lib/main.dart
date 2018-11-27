@@ -1,103 +1,116 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MainScreen());
+}
 
-class MyApp extends StatelessWidget {
+class MainScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Greetings, Flutter",
       theme: new ThemeData(
-        primaryColor: Colors.white,
-        accentColor: Colors.red
+        primaryColor: Colors.deepOrangeAccent[700],
+        accentColor: Colors.red,
       ),
-      home: RandomWords(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Este aplicativo é muito bom.',
+          ),
+        ),
+        body: ShoppingList(
+          products: <Product>[
+            Product(name: 'Apple'),
+            Product(name: 'Banana'),
+            Product(name: 'Cherry'),
+          ],
+        )
+      )
     );
   }
 }
 
-class RandomWordsState extends State<RandomWords> {
+class ShoppingList extends StatefulWidget {
+  ShoppingList({Key key, this.products}) : super(key: key);
 
-  final _suggestions = <WordPair>[];
-  final _saved = Set<WordPair>();
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+  final List<Product> products;
 
-  Widget _buildSuggestions() {
-    return ListView.builder(
-      itemBuilder: (context, i) {
-        if (i.isOdd) return Divider(height: 0);
-        final index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      },
-    );
-  }
+  @override
+    State<StatefulWidget> createState() => _ShoppingListState();
+}
 
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
-    return ListTile(
-      title: Text(pair.asPascalCase, style: _biggerFont),
-      trailing: new Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved)
-            _saved.remove(pair);
+class _ShoppingListState extends State<ShoppingList> {
+  var _shoppingCart = Set<Product>();
+
+  void _handleCartChanged(Product product, bool inCart) {
+    setState(() {
+          if(inCart)
+            _shoppingCart.add(product);
           else
-            _saved.add(pair);
+            _shoppingCart.remove(product);
         });
-      },
-    );
   }
 
-  void _pushSavedRoute() {
-    Navigator.of(this.context).push(
-      new MaterialPageRoute<void>(
-        builder: (context) {
-          final tiles = _saved.map((pair) {
-            return new ListTile(
-              title: new Text(
-                pair.asPascalCase,
-                style: _biggerFont,
-              ),
-            );
-          });
-          final divided = ListTile
-          .divideTiles(context: context, tiles: tiles)
-          .toList();
-          return new Scaffold(
-            appBar: new AppBar(
-              title: const Text("Saved Suggestions"),
-            ),
-            body: new ListView(children: divided),
+  @override
+    Widget build(BuildContext context) {
+      return ListView(
+        children: widget.products.map((Product product) {
+          return ShoppingListItem(
+            product: product,
+            inCart: _shoppingCart.contains(product),
+            onCartChanged: _handleCartChanged,
           );
-        }
-      )
+        }).toList(),
+      );
+    } 
+}
+
+class Product {
+  const Product({this.name});
+  final String name;
+}
+
+typedef void CartChangedCallback(Product product, bool inCart);
+
+class ShoppingListItem extends StatelessWidget {
+  ShoppingListItem({Product product, this.inCart, this.onCartChanged})
+      : product = product,
+        super(key: ObjectKey(product));
+
+  final Product product;
+  final bool inCart;
+  final CartChangedCallback onCartChanged;
+
+  Color _getColor(BuildContext context) {
+    // The theme depends on the BuildContext because different parts of the tree
+    // can have different themes.  The BuildContext indicates where the build is
+    // taking place and therefore which theme to use.
+
+    return inCart ? Colors.black54 : Theme.of(context).primaryColor;
+  }
+
+  TextStyle _getTextStyle(BuildContext context) {
+    if (!inCart) return null;
+
+    return TextStyle(
+      color: Colors.black54,
+      decoration: TextDecoration.lineThrough,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Startup Name Generator"),
-        actions: <Widget>[
-          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSavedRoute),
-        ]
+    return ListTile(
+      onTap: () {
+        onCartChanged(product, !inCart);
+      },
+      leading: CircleAvatar(
+        backgroundColor: _getColor(context),
+        child: Text(product.name[0], style: TextStyle(color: Colors.white)),
       ),
-      body: _buildSuggestions(),
+      title: Text('${product.name}', style: _getTextStyle(context)),
     );
-  }
-}
-
-class RandomWords extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return new RandomWordsState();
   }
 }
