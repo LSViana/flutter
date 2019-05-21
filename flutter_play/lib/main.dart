@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_play/views/state_management.dart';
+import 'package:flutter_play/views/navigation/parallel_navigation.dart';
 
 void main() {
-  runApp(StateManagement());
+  runApp(ParallelNavigation());
 }
