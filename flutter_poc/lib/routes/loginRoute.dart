@@ -18,7 +18,7 @@ class _LoginRouteState extends State<LoginRoute> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.navigate_next
+              Icons.input
             ),
             onPressed: () {
             },

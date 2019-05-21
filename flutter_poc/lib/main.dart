@@ -10,10 +10,10 @@ class App extends StatelessWidget {
       title: 'Flutter PoC',
       theme: ThemeData(
         primaryColor: Colors.blue[600],
-        accentColor: Colors.orangeAccent[700],
-        splashColor: Colors.orangeAccent[700],
-        iconTheme: IconThemeData(
-          color: Colors.orangeAccent[700],
+        accentColor: Colors.blue[400],
+        splashColor: Colors.blue[900],
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
         ),
       ),
       home: SplashRoute()
