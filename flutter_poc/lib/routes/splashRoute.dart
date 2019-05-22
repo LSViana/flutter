@@ -116,7 +116,7 @@ class _SplashDecorationState extends State<SplashDecoration>
                   TextSpan(
                     text: 'Flutter',
                     style: TextStyle(
-                      color: theme.accentColor,
+                      color: theme.primaryColor,
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),

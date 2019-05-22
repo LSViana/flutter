@@ -9,11 +9,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter PoC',
       theme: ThemeData(
-        primaryColor: Colors.blue[600],
+        primaryColor: Colors.blue[900],
         accentColor: Colors.blue[400],
         splashColor: Colors.blue[900],
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           foregroundColor: Colors.white,
+          backgroundColor: Colors.blue[900]
         ),
       ),
       home: SplashRoute()
