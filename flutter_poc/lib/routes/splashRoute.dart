@@ -62,7 +62,7 @@ class _SplashDecorationState extends State<SplashDecoration>
       width: mediaQuery.size.width,
       height: mediaQuery.size.height,
       child: Image.network(
-        'https://pixabay.com/get/55e5d4414c54b108feda84608229357b103bdfe7504c704c70277fd29f4dc659/pyrenees-351266_1920.jpg',
+        'https://www.gannett-cdn.com/-mm-/11f3059c0f1e6dd4ba869f68cb18a79f2d623d80/c=0-76-920-1303/local/-/media/2017/06/06/WIGroup/Milwaukee/636323725537918104-20170606-NPSP-dark-sky.jpg',
         fit: BoxFit.cover,
       ),
     );
@@ -135,23 +135,23 @@ class _SplashDecorationState extends State<SplashDecoration>
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     final ThemeData theme = Theme.of(context);
     //
-    var children2 = <Widget>[
-      createBackgroundImage(mediaQuery),
-      Container(
-          alignment: Alignment.topCenter,
-          padding: const EdgeInsets.only(top: 64),
-          child: Stack(
-            overflow: Overflow.visible,
-            children: <Widget>[
-              createCard(theme),
-              createFloatingActionButton(context),
-            ],
-          )),
-    ];
     return Scaffold(
       body: Container(
         child: Stack(
-          children: children2,
+          children: <Widget>[
+            createBackgroundImage(mediaQuery),
+            Container(
+              alignment: Alignment.topCenter,
+              padding: const EdgeInsets.only(top: 64),
+              child: Stack(
+                overflow: Overflow.visible,
+                children: <Widget>[
+                  createCard(theme),
+                  createFloatingActionButton(context),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
