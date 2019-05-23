@@ -12,8 +12,9 @@ class LoginRoute extends StatefulWidget {
 
 class _LoginRouteState extends State<LoginRoute>
   with SingleTickerProviderStateMixin {
-  String email = "";
-  String password = "";
+
+  String email = "lucas@gmail.com";
+  String password = "Asdf1234";
   bool invalidCredentials = false;
   bool loadingRequest = false;
 
