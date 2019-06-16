@@ -41,7 +41,7 @@ class _FeaturesRouteState extends State<FeaturesRoute> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start, 
             children: [
               Text(
                 feature.title,
@@ -56,7 +56,7 @@ class _FeaturesRouteState extends State<FeaturesRoute> {
         ),
         Container(
           child: FloatingActionButton(
-            heroTag: feature.title,
+            heroTag: feature.title, 
             onPressed: () {
               print(feature.title);
             },

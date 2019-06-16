@@ -17,7 +17,9 @@ class App extends StatelessWidget {
           backgroundColor: Colors.blue[900]
         ),
       ),
-      home: SplashRoute()
+      home: Container(
+        child: SplashRoute(),
+      )
     );
   }
 }
