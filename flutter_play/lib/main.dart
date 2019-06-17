@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_play/views/navigation/parallel_navigation.dart';
+import 'package:flutter_play/views/io/http_files.dart';
 
 void main() {
-  runApp(ParallelNavigation());
+  runApp(HttpFilesTest());
 }
