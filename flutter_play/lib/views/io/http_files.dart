@@ -7,16 +7,13 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 const String BaseAddress = 'http://10.0.3.2:5000';
 
 class HttpFilesTest extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     return HttpFilesTestState();
   }
-
 }
 
 class HttpFilesTestState extends State<HttpFilesTest> {
-
   String fileName = 'truth.txt';
   String fileContent = 'Flutter is nice';
   String readFileContent = '(empty)';
@@ -24,17 +21,13 @@ class HttpFilesTestState extends State<HttpFilesTest> {
   TextEditingController fileContentController;
 
   HttpFilesTestState() {
-    fileNameController = TextEditingController(
-      text: fileName
-    );
+    fileNameController = TextEditingController(text: fileName);
     fileNameController.addListener(() {
       this.setState(() {
         fileName = fileNameController.text;
       });
     });
-    fileContentController = TextEditingController(
-      text: fileContent
-    );
+    fileContentController = TextEditingController(text: fileContent);
     fileContentController.addListener(() {
       this.setState(() {
         fileContent = fileContentController.text;
@@ -56,89 +49,87 @@ class HttpFilesTestState extends State<HttpFilesTest> {
         ),
         body: Container(
           padding: const EdgeInsets.all(16),
-          child: Column(
+          child: ListView(
             children: <Widget>[
-              Card(
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'HTTP',
-                      ),
-                      Row(
-                        children: <Widget>[
-                          RaisedButton(
-                            child: Text(
-                              'LIST'
+              Column(
+                children: <Widget>[
+                  Card(
+                    child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'HTTP',
                             ),
-                            onPressed: this.performHttpList,
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ),
-              ),
-              Card(
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Files',
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          SizedBox(height: 4),
-                          TextField(
-                            controller: fileNameController,
-                            decoration: InputDecoration(
-                              hintText: fileName,
-                              labelText: 'File name',
-                              contentPadding: EdgeInsets.only(bottom: 4),
+                            Row(
+                              children: <Widget>[
+                                RaisedButton(
+                                  child: Text('LIST'),
+                                  onPressed: this.performHttpList,
+                                )
+                              ],
+                            )
+                          ],
+                        )),
+                  ),
+                  Card(
+                    child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Files',
                             ),
-                          ),
-                          SizedBox(height: 8),
-                          TextField(
-                            controller: fileContentController,
-                            onChanged: (value) { this.setState(() => fileContent = value); },
-                            decoration: InputDecoration(
-                              hintText: fileContent,
-                              labelText: 'File content',
-                              contentPadding: EdgeInsets.only(bottom: 4),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                SizedBox(height: 4),
+                                TextField(
+                                  controller: fileNameController,
+                                  decoration: InputDecoration(
+                                    hintText: fileName,
+                                    labelText: 'File name',
+                                    contentPadding: EdgeInsets.only(bottom: 4),
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                TextField(
+                                  controller: fileContentController,
+                                  onChanged: (value) {
+                                    this.setState(() => fileContent = value);
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: fileContent,
+                                    labelText: 'File content',
+                                    contentPadding: EdgeInsets.only(bottom: 4),
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  this.readFileContent,
+                                ),
+                                SizedBox(height: 4),
+                              ],
                             ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            this.readFileContent,
-                          ),
-                          SizedBox(height: 4),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          RaisedButton(
-                            child: Text(
-                              'WRITE'
-                            ),
-                            onPressed: this.writeFile,
-                          ),
-                          SizedBox(width: 8),
-                          RaisedButton(
-                            child: Text(
-                              'READ'
-                            ),
-                            onPressed: this.readFile,
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ),
+                            Row(
+                              children: <Widget>[
+                                RaisedButton(
+                                  child: Text('WRITE'),
+                                  onPressed: this.writeFile,
+                                ),
+                                SizedBox(width: 8),
+                                RaisedButton(
+                                  child: Text('READ'),
+                                  onPressed: this.readFile,
+                                )
+                              ],
+                            )
+                          ],
+                        )),
+                  ),
+                ],
               ),
             ],
           ),
@@ -155,24 +146,24 @@ class HttpFilesTestState extends State<HttpFilesTest> {
       await file.create();
       await file.writeAsString(fileContent);
       print('File wrote');
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
   }
 
   Future readFile() async {
-    var directory = await path_provider.getApplicationDocumentsDirectory(); 
+    var directory = await path_provider.getApplicationDocumentsDirectory();
     var path = directory.path;
     try {
       var file = File('$path/$fileName');
-      if(await file.exists()) {
+      if (await file.exists()) {
         var content = await file.readAsString();
         this.setState(() => readFileContent = content);
         print('File read');
       } else {
         this.setState(() => readFileContent = '(file doesn\'t exist');
       }
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
   }
