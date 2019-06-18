@@ -12,6 +12,16 @@ class CreateAndStyleTextField extends StatefulWidget {
 class CreateAndStyleTextFieldState extends State<CreateAndStyleTextField> {
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -24,8 +34,10 @@ class CreateAndStyleTextFieldState extends State<CreateAndStyleTextField> {
             ),
           ),
           TextFormField(
+            // This property gives focus to the input as soon as it's visible
+            autofocus: true,
             decoration: InputDecoration(
-              labelText: 'Enter your username'
+              labelText: 'Enter your username',
             ),
           ),
         ],

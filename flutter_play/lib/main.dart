@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_play/cookbooks/forms/create_style_text_field.dart';
+import 'cookbooks/gestures/add_ripples.dart';
 
 void main() {
   runApp(
     MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.red,
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -11,7 +14,7 @@ void main() {
           ),
         ),
         // body: BuildAForm(),
-        body: CreateAndStyleTextField(),
+        body: MaterialRipples(),
       ),
     ),
   );
