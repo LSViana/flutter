@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'cookbooks/gestures/add_ripples.dart';
+import 'animations/intro.dart';
 
 void main() {
   runApp(
@@ -10,11 +10,11 @@ void main() {
       home: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Build a Form',
+            'Animations Intro',
           ),
         ),
         // body: BuildAForm(),
-        body: MaterialRipples(),
+        body: AnimationsIntro(),
       ),
     ),
   );
