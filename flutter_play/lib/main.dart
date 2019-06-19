@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'animations/intro.dart';
+import 'animations/examples_docs.dart';
 
 void main() {
   runApp(
@@ -10,11 +10,11 @@ void main() {
       home: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Animations Intro',
+            'Animation Examples',
           ),
         ),
         // body: BuildAForm(),
-        body: AnimationsIntro(),
+        body: AnimationExamples(),
       ),
     ),
   );
