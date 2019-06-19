@@ -20,6 +20,9 @@ with SingleTickerProviderStateMixin {
       vsync: this,
       duration: Duration(seconds: 3),
     );
+    this.animationController.addListener(() {
+      this.setState(() {});
+    });
     curvedAnimation = CurvedAnimation(
       parent: animationController,
       curve: Curves.easeInOut,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'animations/examples_docs.dart';
+import 'package:flutter_play/animations/examples_docs.dart';
 
 void main() {
   runApp(
     MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.red,
+        primaryColor: Colors.lime,
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -13,7 +13,6 @@ void main() {
             'Animation Examples',
           ),
         ),
-        // body: BuildAForm(),
         body: AnimationExamples(),
       ),
     ),
