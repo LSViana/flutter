@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BuildAForm extends StatefulWidget {
@@ -10,6 +11,7 @@ class BuildAForm extends StatefulWidget {
 class BuildAFormState extends State<BuildAForm> {
 
   final _formKey = GlobalKey<FormState>();
+  bool _switch = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,14 @@ class BuildAFormState extends State<BuildAForm> {
             child: Container(
               child: Column(
                 children: <Widget>[
+                  CupertinoSwitch(
+                    value: _switch,
+                    onChanged: (value) {
+                      setState(() {
+                        _switch = value; 
+                      });
+                    },
+                  ),
                   TextFormField(
                     validator: (value) {
                       if(value.isEmpty) {
