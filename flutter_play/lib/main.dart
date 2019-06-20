@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'cookbooks/gestures/add_ripples.dart';
+import 'package:flutter_play/animations/intro_animations.dart';
 
 void main() {
   runApp(
@@ -14,7 +14,7 @@ void main() {
           ),
         ),
         // body: BuildAForm(),
-        body: MaterialRipples(),
+        body: IntroAnimations(),
       ),
     ),
   );
