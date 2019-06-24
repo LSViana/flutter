@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
 class SliversIntro extends StatefulWidget {
@@ -113,7 +112,7 @@ class SliversIntroState extends State<SliversIntro>
             slivers: <Widget>[
               makeSliverHeader('Header 1', primary: true),
               SliverGrid.count(
-                crossAxisCount: 4,
+                crossAxisCount: 3,
                 children: [
                   Container(color: Colors.red, height: 150.0),
                   Container(color: Colors.purple, height: 150.0),
@@ -177,7 +176,7 @@ class SliversIntroState extends State<SliversIntro>
                           ),
                           title: new Text('List tile #${i + 1}'),
                         ),
-                    childCount: 10,
+                    childCount: 12,
                   ),
                 ),
               ),
@@ -211,7 +210,7 @@ class SliversIntroState extends State<SliversIntro>
                           ),
                           title: new Text('List tile #$i'),
                         ),
-                    childCount: 4,
+                    childCount: 12,
                   ),
                 ),
               ),
@@ -235,7 +234,7 @@ class SliversIntroState extends State<SliversIntro>
                           ),
                           title: new Text('List tile #${i + 1}'),
                         ),
-                    childCount: 10,
+                    childCount: 12,
                   ),
                 ),
               ),

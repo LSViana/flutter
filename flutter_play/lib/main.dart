@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_play/views/slivers_intro.dart';
+import 'package:flutter_play/views/state-mgmt/state_mgmt_intro.dart';
 
 void main() {
   runApp(
-    SliversIntro()
+    StateMgmt()
   );
 }
