@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
 class SliversIntro extends StatefulWidget {
   @override
@@ -54,11 +56,10 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
 class SliversIntroState extends State<SliversIntro>
     with SingleTickerProviderStateMixin {
-  ScrollController scrollViewController;
+  ScrollController scrollController;
   TabController tabController;
 
-
-  SliverPersistentHeader makeHeader(String headerText) {
+  makeHeader(String headerText) {
     return SliverPersistentHeader(
       pinned: false,
       floating: true,
@@ -72,77 +73,45 @@ class SliversIntroState extends State<SliversIntro>
     );
   }
 
+  makeSliverHeader(String headerText, {bool primary: false}) {
+    return SliverPersistentHeader(
+      delegate: _SliverAppBarDelegate(
+        child: Container(
+          color: Colors.amber,
+          alignment: Alignment.center,
+          child: Text(
+            headerText,
+          ),
+        ),
+        minHeight: 64,
+        maxHeight: 128,
+      ),
+      // pinned: true,
+      // floating: true,
+    );
+    // return SliverAppBar(
+    //   primary: primary,
+    //   title: Text(headerText),
+    // );
+  }
+
   @override
   void initState() {
     super.initState();
-    scrollViewController = ScrollController();
+    scrollController = ScrollController();
     tabController = TabController(vsync: this, length: 2, initialIndex: 0);
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: new Scaffold(
-        body: new NestedScrollView(
-          controller: scrollViewController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              new SliverAppBar(
-                title: new Text('WhatsApp'),
-                pinned: true,
-                floating: true,
-                forceElevated: innerBoxIsScrolled,
-                bottom: new TabBar(
-                  tabs: <Tab>[
-                    new Tab(text: "STATISTICS"),
-                    new Tab(text: "HISTORY"),
-                  ],
-                  controller: tabController,
-                ),
-              ),
-            ];
-          },
-          body: new TabBarView(
-            children: <Widget>[Text('oi'), Text('hi')],
-            controller: tabController,
-          ),
-        ),
-      ),
-      /*
       home: Scaffold(
         body: Container(
           child: CustomScrollView(
             dragStartBehavior: DragStartBehavior.start,
             controller: scrollController,
             slivers: <Widget>[
-              SliverAppBar(
-                flexibleSpace: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Infinite Scrolling',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-                floating: false,
-                // snap: true,
-                expandedHeight: 120,
-              ),
-              SliverAppBar(
-                pinned: true,
-                flexibleSpace: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Header 1',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ),
+              makeSliverHeader('Header 1', primary: true),
               SliverGrid.count(
                 crossAxisCount: 4,
                 children: [
@@ -157,19 +126,7 @@ class SliversIntroState extends State<SliversIntro>
                   Container(color: Colors.blue, height: 150.0),
                 ],
               ),
-              SliverAppBar(
-                pinned: true,
-                flexibleSpace: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Header 2',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ),
+              makeSliverHeader('Header 2'),
               SliverFixedExtentList(
                 itemExtent: 150.0,
                 delegate: SliverChildListDelegate(
@@ -182,122 +139,110 @@ class SliversIntroState extends State<SliversIntro>
                   ],
                 ),
               ),
-              SliverAppBar(
-                pinned: true,
-                flexibleSpace: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Header 3',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ),
+              makeSliverHeader('Header 3'),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    if(index >= 10)
-                      return null;
+                    if (index >= 5) return null;
                     print('Creating child $index');
                     return Container(
-                      height: 200,
-                      alignment: Alignment.center,
-                      child: Text(
-                        index.toString(),
-                        style: TextStyle(
-                          fontSize: 72,
+                        height: 200,
+                        alignment: Alignment.center,
+                        child: Text(
+                          index.toString(),
+                          style: TextStyle(
+                            fontSize: 72,
+                          ),
                         ),
-                      ),
-                      color: getRandomColor()
-                    );
+                        color: getRandomColor());
                   },
                 ),
               ),
-              makeHeader('Header 4'),
-              SliverFixedExtentList(
-                itemExtent: 150.0,
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(color: Colors.red),
-                    Container(color: Colors.purple),
-                    Container(color: Colors.green),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.yellow),
-                  ],
+              new SliverStickyHeader(
+                header: new Container(
+                  height: 60.0,
+                  color: Colors.lightBlue,
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  alignment: Alignment.centerLeft,
+                  child: new Text(
+                    'Header #0',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                sliver: new SliverList(
+                  delegate: new SliverChildBuilderDelegate(
+                    (context, i) => new ListTile(
+                          leading: new CircleAvatar(
+                            child: new Text('0'),
+                          ),
+                          title: new Text('List tile #${i + 1}'),
+                        ),
+                    childCount: 10,
+                  ),
                 ),
               ),
-              makeHeader('Header 5'),
-              SliverFixedExtentList(
-                itemExtent: 150.0,
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(color: Colors.red),
-                    Container(color: Colors.purple),
-                    Container(color: Colors.green),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.yellow),
-                  ],
+              new SliverStickyHeaderBuilder(
+                builder: (context, state) => new Container(
+                      height: 60.0,
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      decoration: BoxDecoration(
+                        color: (state.isPinned ? Colors.pink : Colors.lightBlue)
+                          .withOpacity(1.0 - state.scrollPercentage),
+                        boxShadow: [
+                          BoxShadow(
+                            color: state.isPinned ? Colors.black.withOpacity(0.5) : Colors.transparent,
+                            blurRadius: 3,
+                            spreadRadius: 0,
+                            offset: Offset.fromDirection(pi / 2, 2)
+                          ),
+                        ]
+                      ),
+                      alignment: Alignment.centerLeft,
+                      child: new Text(
+                        'Header #1',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                sliver: new SliverList(
+                  delegate: new SliverChildBuilderDelegate(
+                    (context, i) => new ListTile(
+                          leading: new CircleAvatar(
+                            child: new Text('0'),
+                          ),
+                          title: new Text('List tile #$i'),
+                        ),
+                    childCount: 4,
+                  ),
                 ),
               ),
-              makeHeader('Header 6'),
-              SliverFixedExtentList(
-                itemExtent: 150.0,
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(color: Colors.red),
-                    Container(color: Colors.purple),
-                    Container(color: Colors.green),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.yellow),
-                  ],
+              new SliverStickyHeader(
+                header: new Container(
+                  height: 60.0,
+                  color: Colors.lightBlue,
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  alignment: Alignment.centerLeft,
+                  child: new Text(
+                    'Header #0',
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
-              ),
-              makeHeader('Header 7'),
-              SliverFixedExtentList(
-                itemExtent: 150.0,
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(color: Colors.red),
-                    Container(color: Colors.purple),
-                    Container(color: Colors.green),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.yellow),
-                  ],
-                ),
-              ),
-              makeHeader('Header 8'),
-              SliverFixedExtentList(
-                itemExtent: 150.0,
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(color: Colors.red),
-                    Container(color: Colors.purple),
-                    Container(color: Colors.green),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.yellow),
-                  ],
-                ),
-              ),
-              makeHeader('Header 9'),
-              SliverFixedExtentList(
-                itemExtent: 150.0,
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(color: Colors.red),
-                    Container(color: Colors.purple),
-                    Container(color: Colors.green),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.yellow),
-                  ],
+                overlapsContent: true,
+                sliver: new SliverList(
+                  delegate: new SliverChildBuilderDelegate(
+                    (context, i) => new ListTile(
+                          leading: new CircleAvatar(
+                            child: new Text('0'),
+                          ),
+                          title: new Text('List tile #${i + 1}'),
+                        ),
+                    childCount: 10,
+                  ),
                 ),
               ),
             ],
           ),
         ),
       ),
-      */
     );
   }
 }
