@@ -12,6 +12,7 @@ class BuildAFormState extends State<BuildAForm> {
 
   final _formKey = GlobalKey<FormState>();
   bool _switch = false;
+  double _slider = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,22 @@ class BuildAFormState extends State<BuildAForm> {
             child: Container(
               child: Column(
                 children: <Widget>[
+                  Slider(
+                    value: _slider,
+                    onChanged: (value) {
+                      setState(() {
+                        _slider = value;
+                      });
+                    },
+                  ),
+                  Switch(
+                    value: _switch,
+                    onChanged: (value) {
+                      setState(() {
+                        _switch = value;
+                      });
+                    },
+                  ),
                   CupertinoSwitch(
                     value: _switch,
                     onChanged: (value) {
