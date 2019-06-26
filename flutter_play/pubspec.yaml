@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  rxdart: ^0.22.0
   path_provider: ^1.1.0
   http: ^0.12.0+2
   sticky_headers: "^0.1.8"

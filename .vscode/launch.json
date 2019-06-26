@@ -10,5 +10,15 @@
             "showMemoryUsage": true,
             "type": "dart"
         },
+        {
+            "name": "Profile",
+            "flutterMode": "profile",
+            "type": "dart"
+        },
+        {
+            "name": "Release",
+            "flutterMode": "release",
+            "type": "dart"
+        },
     ]
 }
