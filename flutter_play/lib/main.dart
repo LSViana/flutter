@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_play/views/state-mgmt/change_notifier.dart';
+import 'package:flutter_play/movie_bloc/app.dart';
 
 void main() {
   runApp(
-    ChangeNotifierTest(),
+    MovieApp(),
   );
 }
