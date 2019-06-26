@@ -75,6 +75,3 @@ class StateMgmtState extends State<StateMgmt> {
   }
 
 }
-
-class _textWidget {
-}
