@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_play/movie_bloc/blocs/movie_bloc.dart';
 import 'package:flutter_play/movie_bloc/models/api/movie.dart';
 import 'package:flutter_play/movie_bloc/models/api/popular_movies.dart';
+import 'package:flutter_play/movie_bloc/providers/movie_detail_bloc_provider.dart';
 import 'package:flutter_play/movie_bloc/ui/movies/details.dart';
 
 class MovieList extends StatefulWidget {
@@ -115,12 +116,18 @@ class MovieCard extends StatelessWidget {
   }
 
   void selectAndOpenMovie(BuildContext context) async {
-    movieBloc.selectMovie(movie.id);
+    // This is the approach I did on my own
+    //movieBloc.selectMovie(movie.id);
     await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) {
-          return MovieDetails();
+          return MovieDetailBlocProvider(
+            child: MovieDetails(
+              // This is the approach suggested by the tutorial
+              movieId: movie.id,
+            ),
+          );
         },
       ),
     );
