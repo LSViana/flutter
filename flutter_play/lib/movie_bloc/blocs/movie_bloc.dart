@@ -8,21 +8,30 @@ class MovieBloc {
   int _selectedMovieId = -1;
 
   final _repository = MovieRepository();
-  final _movieSubject = BehaviorSubject<PopularMovies>();
+  final movieSubject = BehaviorSubject<PopularMovies>();
 
-  Stream<PopularMovies> get popularMovies =>
-    _movieSubject.stream;
+  Observable<PopularMovies> get popularMovies =>
+    movieSubject.stream
+    .map((movies) {
+      return movies;
+    });
 
-  Stream<Movie> get selectedMovie =>
-    _movieSubject.stream
-    .expand((movies) => movies.movies)
-    .firstWhere((movie) => movie.id == _selectedMovieId)
-    .asStream();
+  Observable<Movie> get selectedMovie =>
+    movieSubject.stream
+    .expand((movies) {
+      print('Expanding movies');
+      return movies.movies;
+    })
+    .firstWhere((movie) {
+      print('Filtering movies');
+      return movie.id == _selectedMovieId;
+    })
+    .asObservable();
 
   void fetchPopularMovies() async {
     final popularMovies = await _repository.fetchPopularMovies();
-    // Could be _movieSubject.sink.add(...)
-    _movieSubject.add(popularMovies);
+    // Could be movieSubject.sink.add(...)
+    movieSubject.add(popularMovies);
   }
   
   void selectMovie(int id) {
@@ -33,7 +42,7 @@ class MovieBloc {
   }
 
   dispose() {
-    _movieSubject.close();
+    movieSubject.close();
   }
 }
 

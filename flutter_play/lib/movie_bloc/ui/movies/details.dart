@@ -20,6 +20,7 @@ class _MovieDetailsState extends State<MovieDetails> {
         child: StreamBuilder(
           stream: movieBloc.selectedMovie,
           builder: (context, AsyncSnapshot<Movie> snapshot) {
+            print('Building list ${snapshot.hasData}');
             if(snapshot.hasData) {
               return createDetails(context, snapshot.data);
             } else if(snapshot.hasError) {

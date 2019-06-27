@@ -116,13 +116,22 @@ class MovieCard extends StatelessWidget {
 
   void selectAndOpenMovie(BuildContext context) async {
     movieBloc.selectMovie(movie.id);
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return MovieDetails();
-        },
-      ),
-    );
+    Future.delayed(Duration(seconds: 3), () {
+      print('Changing ${movie.title} to ${movie.title}!');
+      movie.title += '!';
+      print(movieBloc.movieSubject.value.movies[0].title);
+      movieBloc.movieSubject.sink.add(movieBloc.movieSubject.value);
+
+    });
+    Future.delayed(Duration(seconds: 1), () async {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return MovieDetails();
+          },
+        ),
+      );
+    });
   }
 }

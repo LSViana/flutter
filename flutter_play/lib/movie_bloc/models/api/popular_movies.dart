@@ -6,6 +6,13 @@ class PopularMovies {
   int totalPages;
   List<Movie> movies = [];
 
+  PopularMovies({
+    this.page,
+    this.totalResults,
+    this.totalPages,
+    this.movies
+  });
+
   PopularMovies.fromJson(Map<String, dynamic> json) {
     this.page = json["page"];
     this.totalResults = json["total_results"];

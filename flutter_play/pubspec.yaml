@@ -20,6 +20,8 @@ dependencies:
   rxdart: ^0.22.0
   path_provider: ^1.1.0
   http: ^0.12.0+2
+  get_it: ^1.0.3+2
+  scoped_model: ^1.0.1
   sticky_headers: "^0.1.8"
   flutter_sticky_header: "^0.3.4"
   provider: ^2.0.0
