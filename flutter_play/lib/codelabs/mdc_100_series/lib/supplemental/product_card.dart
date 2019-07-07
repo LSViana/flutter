@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
   final double imageAspectRatio;
   final Product product;
 
-  static final kTextBoxHeight = 65.0;
+  static final textBoxHeight = 65.0;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class ProductCard extends StatelessWidget {
           child: imageWidget,
         ),
         SizedBox(
-          height: kTextBoxHeight * MediaQuery.of(context).textScaleFactor,
+          height: textBoxHeight * MediaQuery.of(context).textScaleFactor,
           width: 121.0,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
