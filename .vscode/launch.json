@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug",
+            "name": "debug",
             "flutterMode": "debug",
             "showMemoryUsage": true,
             "type": "dart"
         },
         {
-            "name": "Profile",
+            "name": "profile",
             "flutterMode": "profile",
             "type": "dart"
         },
         {
-            "name": "Release",
+            "name": "release",
             "flutterMode": "release",
             "type": "dart"
         },

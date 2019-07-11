@@ -47,6 +47,11 @@ with SingleTickerProviderStateMixin {
                 width: _dimensionAnimation.value,
                 height: _dimensionAnimation.value,
               ),
+              // Container(
+              //   color: Colors.amber,
+              //   width: _dimensionAnimation.value,
+              //   height: _dimensionAnimation.value,
+              // ),
             ]
           ),
         ),

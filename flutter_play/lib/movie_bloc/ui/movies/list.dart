@@ -116,27 +116,6 @@ class MovieCard extends StatelessWidget {
   }
 
   void selectAndOpenMovie(BuildContext context) async {
-<<<<<<< HEAD
-    movieBloc.selectMovie(movie.id);
-    Future.delayed(Duration(seconds: 3), () {
-      print('Changing ${movie.title} to ${movie.title}!');
-      movie.title += '!';
-      print(movieBloc.movieSubject.value.movies[0].title);
-      movieBloc.movieSubject.sink.add(movieBloc.movieSubject.value);
-
-    });
-    Future.delayed(Duration(seconds: 1), () async {
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return MovieDetails();
-          },
-        ),
-      );
-    });
-=======
-    // This is the approach I did on my own
     //movieBloc.selectMovie(movie.id);
     await Navigator.push(
       context,
@@ -151,6 +130,5 @@ class MovieCard extends StatelessWidget {
         },
       ),
     );
->>>>>>> 84e576f9e5a9fc9dd7b0fc2cf2c078ae9f4388ac
   }
 }
