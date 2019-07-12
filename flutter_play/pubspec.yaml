@@ -27,6 +27,7 @@ dependencies:
   flutter_svg: ^0.13.1
   provider: ^2.0.0
   charts_flutter: ^0.6.0
+  google_maps_flutter: ^0.5.19+2
   flutter:
     sdk: flutter
 
