@@ -5,6 +5,7 @@ import 'package:flutter_play/counter_bloc/app.dart';
 import 'package:flutter_play/counter_scoped_model/app.dart';
 import 'package:flutter_play/google_maps/google_maps_app.dart';
 import 'package:flutter_play/movie_bloc/app.dart';
+import 'package:flutter_play/pageview/pageview_app.dart';
 import 'package:flutter_play/svg/svg_app.dart';
 
 void main() {
@@ -15,6 +16,7 @@ void main() {
     // ChartsApp(),
     // MovieApp(),
     // SvgApp(),
-    GoogleMapsApp(),
+    // GoogleMapsApp(),
+    PageViewApp(),
   );
 }
