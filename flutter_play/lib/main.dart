@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_play/animatedcrossfade/animatedcrossfade_app.dart';
 import 'package:flutter_play/animations/examples_docs.dart';
 import 'package:flutter_play/charts/charts_app.dart';
 import 'package:flutter_play/counter_bloc/app.dart';
@@ -17,6 +18,7 @@ void main() {
     // MovieApp(),
     // SvgApp(),
     // GoogleMapsApp(),
-    PageViewApp(),
+    // PageViewApp(),
+    AnimatedCrossFadeApp(),
   );
 }
